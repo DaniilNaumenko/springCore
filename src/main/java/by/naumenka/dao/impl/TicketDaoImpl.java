@@ -4,6 +4,8 @@ import by.naumenka.dao.TicketDao;
 import by.naumenka.model.Ticket;
 import by.naumenka.storage.Storage;
 
+import java.util.List;
+
 public class TicketDaoImpl implements TicketDao {
 
     private Storage storage;
@@ -26,6 +28,11 @@ public class TicketDaoImpl implements TicketDao {
     @Override
     public Ticket deleteTicket(long id) {
         return storage.getTickets().remove(id);
+    }
+
+    @Override
+    public List<Ticket> getAllTickets() {
+        return (List<Ticket>) storage.getTickets().values();
     }
 
     public void setStorage(Storage storage) {

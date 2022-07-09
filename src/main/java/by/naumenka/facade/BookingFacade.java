@@ -1,5 +1,6 @@
 package by.naumenka.facade;
 
+import by.naumenka.exception.UserNotFoundException;
 import by.naumenka.model.Event;
 import by.naumenka.model.Ticket;
 import by.naumenka.model.User;
@@ -45,15 +46,15 @@ public interface BookingFacade {
     /**
      * Creates new event. Event id should be auto-generated.
      *
-     * @param event Event data.
+     * @param event Event file.
      * @return Created Event object.
      */
     Event createEvent(Event event);
 
     /**
-     * Updates event using given data.
+     * Updates event using given file.
      *
-     * @param event Event data for update. Should have id set.
+     * @param event Event file for update. Should have id set.
      * @return Updated Event object.
      */
     Event updateEvent(Event event);
@@ -78,7 +79,7 @@ public interface BookingFacade {
      *
      * @return User.
      */
-    User getUserByEmail(String email);
+    User getUserByEmail(String email) throws UserNotFoundException;
 
     /**
      * Get list of users by matching name. Name is matched using 'contains' approach.
@@ -94,15 +95,15 @@ public interface BookingFacade {
     /**
      * Creates new user. User id should be auto-generated.
      *
-     * @param user User data.
+     * @param user User file.
      * @return Created User object.
      */
     User createUser(User user);
 
     /**
-     * Updates user using given data.
+     * Updates user using given file.
      *
-     * @param user User data for update. Should have id set.
+     * @param user User file for update. Should have id set.
      * @return Updated User object.
      */
     User updateUser(User user);

@@ -2,7 +2,6 @@ package by.naumenka.service.impl;
 
 import by.naumenka.dao.EventDao;
 import by.naumenka.model.Event;
-import by.naumenka.model.User;
 import by.naumenka.service.EventService;
 
 import java.util.Calendar;
