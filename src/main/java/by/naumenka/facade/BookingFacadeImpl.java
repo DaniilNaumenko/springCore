@@ -17,7 +17,6 @@ public class BookingFacadeImpl implements BookingFacade {
     private final EventService eventService;
     private final TicketService ticketService;
 
-    //constructor injection
     public BookingFacadeImpl(UserService userService, EventService eventService, TicketService ticketService) {
         this.userService = userService;
         this.eventService = eventService;
@@ -75,8 +74,8 @@ public class BookingFacadeImpl implements BookingFacade {
     }
 
     @Override
-    public User updateUser(User user) {
-        return userService.updateUser(user);
+    public User updateUser(long id, User user) {
+        return userService.updateUser(id, user);
     }
 
     @Override

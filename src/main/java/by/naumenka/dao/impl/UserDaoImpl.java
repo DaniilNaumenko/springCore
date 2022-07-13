@@ -4,6 +4,7 @@ import by.naumenka.dao.UserDao;
 import by.naumenka.model.User;
 import by.naumenka.storage.Storage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
@@ -21,8 +22,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User updateUser(User user) {
-        return storage.getUsers().replace(user.getId(), user);
+    public User updateUser(long id, User user) {
+        return storage.getUsers().replace(id, user);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return (List<User>) storage.getUsers().values();
+        return new ArrayList<>(storage.getUsers().values());
     }
 
     public void setStorage(Storage storage) {

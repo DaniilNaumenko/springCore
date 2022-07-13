@@ -25,5 +25,30 @@ public class UserDaoTest {
     @Test
     public void createUserTest(){
         Assert.assertNull(userDao.createUser(user));
+        Assert.assertEquals(user, userDao.readUser(user.getId()));
+    }
+
+    @Test
+    public void readUserTest() {
+        Assert.assertNull(userDao.createUser(user));
+        Assert.assertEquals(user, userDao.readUser(user.getId()));
+    }
+
+    @Test
+    public void updateUserTest() {
+        Assert.assertNull(userDao.createUser(user));
+        Assert.assertEquals(user, userDao.updateUser(user.getId(), user));
+    }
+
+    @Test
+    public void deleteUserTest() {
+        Assert.assertNull(userDao.createUser(user));
+        Assert.assertEquals(user, userDao.deleteUser(user.getId()));
+    }
+
+    @Test
+    public void getAllUsersTest() {
+        Assert.assertNull(userDao.createUser(user));
+        Assert.assertNotNull(userDao.getAllUsers());
     }
 }

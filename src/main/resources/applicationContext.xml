@@ -22,4 +22,7 @@
     <bean class="by.naumenka.dao.impl.TicketDaoImpl" id="ticketDao"
           p:storage-ref="storage"/>
 
+    <bean class="by.naumenka.service.impl.UserServiceImpl" id="userService">
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
 </beans>
