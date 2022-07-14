@@ -1,6 +1,7 @@
 package by.naumenka.service.impl;
 
 import by.naumenka.dao.EventDao;
+import by.naumenka.exception.EventNotFoundException;
 import by.naumenka.model.Event;
 import by.naumenka.service.EventService;
 
@@ -57,13 +58,21 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event createEvent(Event event) {
-        return eventDao.createEvent(event);
+    public Event createEvent(Event event) throws EventNotFoundException {
+        Long maxId = eventDao.getAllEvents().stream()
+                .max(Comparator.comparing(Event::getId))
+                .map(Event::getId)
+                .orElseThrow(() -> new EventNotFoundException("There are no events in storage"));
+
+        event.setId(maxId + 1);
+        eventDao.createEvent(event);
+        return eventDao.readEvent(event.getId());
     }
 
     @Override
-    public Event updateEvent(Event event) {
-        return eventDao.updateEvent(event);
+    public Event updateEvent(long id, Event event) {
+        eventDao.updateEvent(id, event);
+        return eventDao.readEvent(id);
     }
 
     @Override

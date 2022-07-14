@@ -1,5 +1,7 @@
 package by.naumenka.facade;
 
+import by.naumenka.exception.EventNotFoundException;
+import by.naumenka.exception.TicketNotFoundException;
 import by.naumenka.exception.UserNotFoundException;
 import by.naumenka.model.Event;
 import by.naumenka.model.Ticket;
@@ -49,7 +51,7 @@ public interface BookingFacade {
      * @param event Event file.
      * @return Created Event object.
      */
-    Event createEvent(Event event);
+    Event createEvent(Event event) throws EventNotFoundException;
 
     /**
      * Updates event using given file.
@@ -57,7 +59,7 @@ public interface BookingFacade {
      * @param event Event file for update. Should have id set.
      * @return Updated Event object.
      */
-    Event updateEvent(Event event);
+    Event updateEvent(long id,Event event);
 
     /**
      * Deletes event by its id.
@@ -98,7 +100,7 @@ public interface BookingFacade {
      * @param user User file.
      * @return Created User object.
      */
-    User createUser(User user);
+    User createUser(User user) throws UserNotFoundException;
 
     /**
      * Updates user using given file.
@@ -126,7 +128,7 @@ public interface BookingFacade {
      * @return Booked ticket object.
      * @throws java.lang.IllegalStateException if this place has already been booked.
      */
-    Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category);
+    Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) throws TicketNotFoundException;
 
     /**
      * Get all booked tickets for specified user. Tickets should be sorted by event date in descending order.

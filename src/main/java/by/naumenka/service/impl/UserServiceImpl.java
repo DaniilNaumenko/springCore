@@ -45,10 +45,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        user.setId(4);
+    public User createUser(User user) throws UserNotFoundException {
+        Long maxId = userDao.getAllUsers().stream()
+                .max(Comparator.comparing(User::getId))
+                .map(User::getId)
+                .orElseThrow(() -> new UserNotFoundException("There are no users in storage"));
+
+        user.setId(maxId + 1);
         userDao.createUser(user);
-        return userDao.readUser(4);
+        return userDao.readUser(user.getId());
     }
 
     @Override

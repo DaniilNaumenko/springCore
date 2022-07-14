@@ -25,4 +25,18 @@
     <bean class="by.naumenka.service.impl.UserServiceImpl" id="userService">
         <constructor-arg name="userDao" ref="userDao"/>
     </bean>
+
+    <bean class="by.naumenka.service.impl.EventServiceImpl" id="eventService">
+        <constructor-arg name="eventDao" ref="eventDao"/>
+    </bean>
+
+    <bean class="by.naumenka.service.impl.TicketServiceImpl" id="ticketService">
+        <constructor-arg name="ticketDao" ref="ticketDao"/>
+    </bean>
+
+    <bean class="by.naumenka.facade.BookingFacadeImpl" id="bookingFacade">
+        <constructor-arg name="userService" ref="userService"/>
+        <constructor-arg name="eventService" ref="eventService"/>
+        <constructor-arg name="ticketService" ref="ticketService"/>
+    </bean>
 </beans>

@@ -1,5 +1,7 @@
 package by.naumenka.facade;
 
+import by.naumenka.exception.EventNotFoundException;
+import by.naumenka.exception.TicketNotFoundException;
 import by.naumenka.exception.UserNotFoundException;
 import by.naumenka.model.Event;
 import by.naumenka.model.Ticket;
@@ -39,13 +41,13 @@ public class BookingFacadeImpl implements BookingFacade {
     }
 
     @Override
-    public Event createEvent(Event event) {
+    public Event createEvent(Event event) throws EventNotFoundException {
         return eventService.createEvent(event);
     }
 
     @Override
-    public Event updateEvent(Event event) {
-        return eventService.updateEvent(event);
+    public Event updateEvent(long id,Event event) {
+        return eventService.updateEvent(id, event);
     }
 
     @Override
@@ -69,7 +71,7 @@ public class BookingFacadeImpl implements BookingFacade {
     }
 
     @Override
-    public User createUser(User user) {
+    public User createUser(User user) throws UserNotFoundException  {
         return userService.createUser(user);
     }
 
@@ -84,7 +86,7 @@ public class BookingFacadeImpl implements BookingFacade {
     }
 
     @Override
-    public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
+    public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) throws TicketNotFoundException {
         return ticketService.bookTicket(userId, eventId, place, category);
     }
 

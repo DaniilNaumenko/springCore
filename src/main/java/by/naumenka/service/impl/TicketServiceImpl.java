@@ -1,6 +1,7 @@
 package by.naumenka.service.impl;
 
 import by.naumenka.dao.TicketDao;
+import by.naumenka.exception.TicketNotFoundException;
 import by.naumenka.model.Event;
 import by.naumenka.model.Ticket;
 import by.naumenka.model.User;
@@ -20,9 +21,15 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
+    public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) throws TicketNotFoundException {
+        Long maxId = ticketDao.getAllTickets().stream()
+                .max(Comparator.comparing(Ticket::getId))
+                .map(Ticket::getId)
+                .orElseThrow(() -> new TicketNotFoundException("There are no tickets in storage"));
         Ticket ticket = new TicketImpl(eventId, userId, category, place);
-        return ticketDao.createTicket(ticket);
+        ticket.setId(maxId + 1);
+        ticketDao.createTicket(ticket);
+        return ticketDao.readTicket(ticket.getId());
     }
 
     @Override

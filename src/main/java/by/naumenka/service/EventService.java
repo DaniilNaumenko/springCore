@@ -1,5 +1,6 @@
 package by.naumenka.service;
 
+import by.naumenka.exception.EventNotFoundException;
 import by.naumenka.model.Event;
 
 import java.util.Date;
@@ -13,9 +14,9 @@ public interface EventService {
 
     List<Event> getEventsForDay(Date day, int pageSize, int pageNum);
 
-    Event createEvent(Event event);
+    Event createEvent(Event event)  throws EventNotFoundException;
 
-    Event updateEvent(Event event);
+    Event updateEvent(long id,Event event);
 
     boolean deleteEvent(long eventId);
 }
